@@ -1,0 +1,39 @@
+section {
+    height: 100%;
+}
+
+.card:hover {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+.content > div > div:nth-child(2n):hover {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+
+.content > div > div:nth-child(2n) {
+    background-color: lightgray;
+}
+
+.card {
+    border-radius: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card > h2 {
+    padding: 10px;
+    font-size: 40px;
+}
+
+.card > p {
+    font-size: 20px;
+    min-height: 10vh;
+}
+
+.card > span {
+    font-size: 20vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
