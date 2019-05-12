@@ -1,7 +1,10 @@
-import React from 'react';
-import Chessground from 'chessground'
-import { Route } from 'react-router-dom';
-import { Chess } from 'chess.js';
+import React, { RefObject } from 'react';
+import { Chessground } from 'chessground'
+import { Api } from 'chessground/api'
+import { ChessInstance } from 'chess.js';
+import ReactDOM from 'react-dom';
+
+const Chess = require('chess.js')
 
 export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
   [key: string]: any;
@@ -12,12 +15,27 @@ export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
 
 class Chessboard extends React.Component<ChessboardProps> {
   
+  private container : RefObject<HTMLDivElement>;
+
+  private chess? : ChessInstance;
+
+  private api? : Api;
+
   constructor(props: ChessboardProps) {
     super(props);
+
+    this.container = React.createRef<HTMLDivElement>()
+  }
+  
+  render() {
+    return <div ref={this.container}/>;
   }
 
-  render() {
-    return <p></p>
+  componentDidMount() {
+    const node = this.container.current as HTMLElement;
+
+    this.chess = new Chess(this.props.fen);
+    this.api = Chessground(node) ;
   }
 }
 
