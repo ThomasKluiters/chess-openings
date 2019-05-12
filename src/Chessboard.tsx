@@ -4,6 +4,8 @@ import { Api } from 'chessground/api'
 import { ChessInstance } from 'chess.js';
 import ReactDOM from 'react-dom';
 
+import './Chessground.css'
+
 const Chess = require('chess.js')
 
 export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
