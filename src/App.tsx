@@ -1,16 +1,17 @@
 import React from 'react';
-
-import Header from './Header';
-import Content from './Content';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import './App.css'
 
+import Splash from './Splash';
+import Explore from './Explore';
+
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Header></Header>
-      <Content></Content>
-    </div>
+    <Router>
+      <Splash></Splash>
+      <Explore></Explore>
+    </Router>
   );
 }
 
