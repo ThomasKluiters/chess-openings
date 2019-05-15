@@ -1,4 +1,4 @@
-*
+/*
  * Chessground base css properties.
  *
  * You need to include the css files in themes folder in order to have the
@@ -10,6 +10,7 @@
   height: 320px;
   position: relative;
   display: block;
+  background-image: url('/images/board/blue.svg');
 }
 .cg-board {
   position: absolute;
@@ -141,4 +142,41 @@
 }
 .cg-board-wrap coords.ranks coord {
   transform: translateY(39%);
+}
+
+.merida .cg-board-wrap piece.pawn.white {
+  background-image: url('/images/pieces/merida/wp.svg');
+}
+.merida .cg-board-wrap piece.bishop.white {
+  background-image: url('/images/pieces/merida/wb.svg');
+}
+.merida .cg-board-wrap piece.knight.white {
+  background-image: url('/images/pieces/merida/wn.svg');
+}
+.merida .cg-board-wrap piece.rook.white {
+  background-image: url('/images/pieces/merida/wr.svg');
+}
+.merida .cg-board-wrap piece.queen.white {
+  background-image: url('/images/pieces/merida/wq.svg');
+}
+.merida .cg-board-wrap piece.king.white {
+  background-image: url('/images/pieces/merida/wk.svg');
+}
+.merida .cg-board-wrap piece.pawn.black {
+  background-image: url('/images/pieces/merida/bp.svg');
+}
+.merida .cg-board-wrap piece.bishop.black {
+  background-image: url('/images/pieces/merida/bb.svg');
+}
+.merida .cg-board-wrap piece.knight.black {
+  background-image: url('/images/pieces/merida/bn.svg');
+}
+.merida .cg-board-wrap piece.rook.black {
+  background-image: url('/images/pieces/merida/br.svg');
+}
+.merida .cg-board-wrap piece.queen.black {
+  background-image: url('/images/pieces/merida/bq.svg');
+}
+.merida .cg-board-wrap piece.king.black {
+  background-image: url('/images/pieces/merida/bk.svg');
 }
