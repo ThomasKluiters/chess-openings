@@ -1,24 +1,12 @@
-import React, { ChangeEvent, MouseEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import axios from 'axios'
-import { Chessboard } from './Chessboard'
 import { Col, Row, Container } from 'reactstrap'
+import Eco from './Eco'
 
 import './Explorer.css'
 
-export interface ExplorerCardProps extends React.HTMLProps<HTMLDivElement> {
-    [key: string]: any;
-    tag?: React.ReactType;
-
-    eco: Eco;
-}
-
-export interface ExplorerItemProps extends React.HTMLProps<HTMLDivElement> {
-    [key: string]: any;
-    tag?: React.ReactType;
-
-    eco: Eco;
-}
-
+import ExplorerCard from './explorer/ExplorerCard'
+import ExplorerItem from './explorer/ExplorerItem'
 
 export interface ExplorerProps extends React.HTMLProps<HTMLDivElement> {
     [key: string]: any;
@@ -27,79 +15,6 @@ export interface ExplorerProps extends React.HTMLProps<HTMLDivElement> {
 
 interface ExplorerState {
     items: Eco[]
-}
-
-class Eco {
-    
-    private _moves: string
-    
-    private _name : string
-
-    private _eco: string
-
-    private _fen: string
-
-    constructor(name : string, eco : string, fen : string, moves : string) {
-        this._moves = moves
-        this._name = name
-        this._eco = eco
-        this._fen = fen
-    }
-
-    public get name() : string {
-        return this._name
-    }
-
-    public get fen() : string {
-        return this._fen
-    }
-
-    public get eco() : string {
-        return this._eco
-    }
-}
-
-class ExplorerItem extends React.Component<ExplorerItemProps> {
-    constructor(props: ExplorerCardProps) {
-        super(props)
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick(event: MouseEvent) {
-        console.log(this.props.eco.fen)
-    }
-
-    render() {
-        return (
-            <li className="list-group-item opening-item">{ this.props.eco.name }</li>
-        )
-    }
-}
-
-class ExplorerCard extends React.Component<ExplorerCardProps> {
-    constructor(props: ExplorerCardProps) {
-        super(props)
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick(event: MouseEvent) {
-        console.log(this.props.eco.fen)
-    }
-
-    render() {
-        return (
-            <Col md="6" style={( { 
-                padding: "30px",
-                textAlign: "center",
-                transition: "margin .5"
-            } )} className="opening-card" onClick={ this.handleClick }>
-                <Chessboard fen={ this.props.eco.fen } width="260px" height="260px"></Chessboard>
-                <h3 style={( { paddingTop: "20px" }) }>{ this.props.eco.name }</h3>
-            </Col>
-        )
-    }
 }
 
 class Explorer extends React.Component<ExplorerProps, ExplorerState> {
@@ -135,8 +50,6 @@ class Explorer extends React.Component<ExplorerProps, ExplorerState> {
         this.fetchOpenings(event.target.value)
     }
 
-
-      
     render() {
          return (
              <Container>
