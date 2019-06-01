@@ -14,7 +14,7 @@ const Cards: React.FC = () => {
   return (
     <section>
         <Container className="text-center content">
-            <Row className="md-16">
+            <Row>
                 <Card 
                     link="/explore"
                     title="Explore"

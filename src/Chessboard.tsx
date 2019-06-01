@@ -12,10 +12,12 @@ export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
   [key: string]: any;
   tag?: React.ReactType;
   
-  fen?: string
+  fen?: string,
+  width?: string,
+  height?: string
 }
 
-class Chessboard extends React.Component<ChessboardProps> {
+export class Chessboard extends React.Component<ChessboardProps> {
   
   private container : RefObject<HTMLDivElement>;
 
@@ -67,8 +69,12 @@ class Chessboard extends React.Component<ChessboardProps> {
 
   componentDidMount() {
     const node = this.container.current as HTMLElement;
+    
 
-    this.chess = new Chess();
+    node.style.width = this.props.width || "320px"
+    node.style.height = this.props.height || "320px"
+
+    this.chess = new Chess(this.props.fen);
     this.api = Chessground(node, {
       movable: {
         color: 'white',
@@ -78,7 +84,8 @@ class Chessboard extends React.Component<ChessboardProps> {
       },
       draggable: {
         showGhost: true
-      }
+      },
+      fen: this.props.fen
     });
   }
 }

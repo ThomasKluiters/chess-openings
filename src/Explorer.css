@@ -1,0 +1,9 @@
+.opening-item:hover {
+    cursor: pointer;
+    background-color: #8ca2ad;
+}
+
+.opening-card:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
