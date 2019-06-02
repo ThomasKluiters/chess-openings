@@ -1,5 +1,8 @@
+
 export default class Eco {
-    
+
+    private _id: string
+
     private _moves: string
     
     private _name : string
@@ -8,11 +11,16 @@ export default class Eco {
 
     private _fen: string
 
-    constructor(name : string, eco : string, fen : string, moves : string) {
-        this._moves = moves
-        this._name = name
-        this._eco = eco
-        this._fen = fen
+    constructor(c : string, n : string, f : string, id : string, m : string) {
+        this._moves = m
+        this._name = n
+        this._eco = c
+        this._fen = f
+        this._id = id
+    }
+
+    public get id() : string {
+        return this._id
     }
 
     public get name() : string {
@@ -25,5 +33,9 @@ export default class Eco {
 
     public get eco() : string {
         return this._eco
+    }
+
+    public get moves() : string {
+        return this._moves
     }
 }

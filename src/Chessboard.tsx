@@ -1,10 +1,12 @@
 import React, { RefObject } from 'react';
 import { Chessground } from 'chessground'
 import { Api } from 'chessground/api'
+import { Key, Piece } from 'chessground/types';
+import { configure } from 'chessground/config'
+import { defaults, State } from 'chessground/state'
 import { ChessInstance, Square } from 'chess.js';
 
 import './Chessground.css'
-import { Key } from 'chessground/types';
 
 const Chess = require('chess.js')
 
@@ -14,12 +16,14 @@ export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
   
   fen?: string,
   width?: string,
-  height?: string
+  height?: string,
+
+  onMove?: (chess: ChessInstance, orig: Key, dest: Key) => void
 }
 
 export class Chessboard extends React.Component<ChessboardProps> {
   
-  private container : RefObject<HTMLDivElement>;
+  private container = React.createRef<HTMLDivElement>();
 
   private chess? : ChessInstance;
 
@@ -27,8 +31,6 @@ export class Chessboard extends React.Component<ChessboardProps> {
 
   constructor(props: ChessboardProps) {
     super(props);
-
-    this.container = React.createRef<HTMLDivElement>()
 
     this.computeMoves = this.computeMoves.bind(this);
     this.flipColor = this.flipColor.bind(this);
@@ -49,14 +51,18 @@ export class Chessboard extends React.Component<ChessboardProps> {
   }
 
   computeMoves(orig: Key, dest: Key) {
-      this.chess!.move({from: orig as Square, to: dest as Square});
-      this.api!.set({
-        turnColor: this.flipColor(),
-        movable: {
-          color: this.flipColor(),
-          dests: this.toDests()
-        }
-      });
+    this.chess!.move({from: orig as Square, to: dest as Square});
+    this.api!.set({
+      turnColor: this.flipColor(),
+      movable: {
+        color: this.flipColor(),
+        dests: this.toDests()
+      }
+    });
+
+    if (this.props.onMove) {
+      this.props.onMove(this.chess!, orig, dest)
+    }
   }
 
   render() {
@@ -70,12 +76,9 @@ export class Chessboard extends React.Component<ChessboardProps> {
     );
   }
 
-  componentDidMount() {
-    const node = this.container.current as HTMLElement;
+  reset() {
+    const node = this.container.current as HTMLElement
     
-    node.style.width = this.props.width || "320px"
-    node.style.height = this.props.height || "320px"
-
     this.chess = new Chess(this.props.fen);
     this.api = Chessground(node, {
       movable: {
@@ -89,6 +92,15 @@ export class Chessboard extends React.Component<ChessboardProps> {
       },
       fen: this.props.fen
     });
+  }
+
+  componentDidMount() {
+    const node = this.container.current as HTMLElement;
+    
+    node.style.width = this.props.width || "320px"
+    node.style.height = this.props.height || "320px"
+
+    this.reset()
   }
 }
 

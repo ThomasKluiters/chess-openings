@@ -11,7 +11,7 @@ class ExplorerItem extends React.Component<ExplorerLinkProps> {
     }
     
     handleClick(event: MouseEvent) {
-        this.props.history.push(`practice/${this.props.eco.name}`)
+        this.props.history.push(`practice/${this.props.eco.id}`)
     }
 
     render() {
