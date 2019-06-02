@@ -61,7 +61,10 @@ export class Chessboard extends React.Component<ChessboardProps> {
 
   render() {
     return (
-      <div className="merida">
+      <div className="merida" style={{
+        "width": this.props.width || "320px",
+        "height": this.props.height || "320px"
+      }}>
         <div ref={this.container}/>
       </div>
     );
@@ -70,7 +73,6 @@ export class Chessboard extends React.Component<ChessboardProps> {
   componentDidMount() {
     const node = this.container.current as HTMLElement;
     
-
     node.style.width = this.props.width || "320px"
     node.style.height = this.props.height || "320px"
 
