@@ -5,6 +5,7 @@ import Eco from './Eco'
 
 import './Explorer.css'
 
+import Header from './Header';
 import ExplorerCard from './explorer/ExplorerCard'
 import ExplorerItem from './explorer/ExplorerItem'
 
@@ -35,7 +36,7 @@ class Explorer extends React.Component<ExplorerProps, ExplorerState> {
 
         axios.get("/eco.json").then(response => {
             const items = response.data.filter((eco : Eco) => {
-                return eco.name.toLowerCase().indexOf(query) != -1
+                return eco.name.toLowerCase().indexOf(query) !== -1
             })
 
             this.setState(state => {
@@ -52,28 +53,37 @@ class Explorer extends React.Component<ExplorerProps, ExplorerState> {
 
     render() {
          return (
-             <Container>
-                 <Row>
-                    <Col md="8">
-                        { this.state.items.slice(0, 4).map(value => {
-                            return (
-                                <ExplorerCard key={ value.fen } eco={ value }></ExplorerCard>
-                            )
-                        })}
-                    </Col>
-                    <Col md="4">
-                        <div className="md-form mt-0">
-                        <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={this.handleQuery}/>
-                        <ul className="list-group">
-                            { this.state.items.slice(0, 26).map(value => {
-                                return <ExplorerItem key= {value.fen } eco = { value }></ExplorerItem>
-                            }) }
-                        </ul>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+             <div>
+                <Header title="Opening Explorer"></Header>
+                <Container className="explorer-content">
+                    <Row>
+                        <Col>
+                            <div className="md-form mt-0">
+                            <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={this.handleQuery}/>
+                            <ul className="list-group">
+                                { this.state.items.slice(0, 26).map(value => {
+                                    return <ExplorerItem key= {value.fen } eco = { value }></ExplorerItem>
+                                }) }
+                            </ul>
+                            </div>
+                        </Col>
+                        <Col md="8">
+                            <Row>
+                            { this.state.items.slice(0, 4).map(value => {
+                                return (
+                                    <ExplorerCard key={ value.fen } eco={ value }></ExplorerCard>
+                                )
+                            })}
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
+    }
+
+    componentDidMount() {
+        this.fetchOpenings("");
     }
 }
 

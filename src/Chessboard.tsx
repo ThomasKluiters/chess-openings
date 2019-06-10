@@ -18,7 +18,7 @@ export interface ChessboardProps extends React.HTMLProps<HTMLDivElement> {
   width?: string,
   height?: string,
 
-  onMove?: (chess: ChessInstance, orig: Key, dest: Key) => void
+  onMove?: (api: Api, chess: ChessInstance, orig: Key, dest: Key) => void
 }
 
 export class Chessboard extends React.Component<ChessboardProps> {
@@ -35,6 +35,7 @@ export class Chessboard extends React.Component<ChessboardProps> {
     this.computeMoves = this.computeMoves.bind(this);
     this.flipColor = this.flipColor.bind(this);
     this.toDests = this.toDests.bind(this);
+    this.orient = this.orient.bind(this);
   }
   
   toDests() {
@@ -50,6 +51,11 @@ export class Chessboard extends React.Component<ChessboardProps> {
     return (this.chess!.turn() === 'w') ? 'white' : 'black';
   }
 
+  move(orig: Key, dest: Key) {
+    this.computeMoves(orig, dest)
+    this.api!.move(orig, dest)
+  }
+
   computeMoves(orig: Key, dest: Key) {
     this.chess!.move({from: orig as Square, to: dest as Square});
     this.api!.set({
@@ -61,7 +67,7 @@ export class Chessboard extends React.Component<ChessboardProps> {
     });
 
     if (this.props.onMove) {
-      this.props.onMove(this.chess!, orig, dest)
+      this.props.onMove(this.api!, this.chess!, orig, dest);
     }
   }
 
@@ -81,6 +87,7 @@ export class Chessboard extends React.Component<ChessboardProps> {
     
     this.chess = new Chess(this.props.fen);
     this.api = Chessground(node, {
+      orientation: this.api ? this.api.state.orientation : 'white',
       movable: {
         color: 'white',
         free: false,
@@ -92,6 +99,12 @@ export class Chessboard extends React.Component<ChessboardProps> {
       },
       fen: this.props.fen
     });
+  }
+
+  orient(color: string) {
+    if (!this.api!.state.orientation.startsWith(color)) {
+      this.api!.toggleOrientation()
+    }
   }
 
   componentDidMount() {

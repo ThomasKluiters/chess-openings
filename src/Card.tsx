@@ -27,10 +27,12 @@ class Card extends React.Component<CardProps> {
 
     render() {
          return (
-         <Col md="3" className="card col-md-offset-1" onClick={this.handleClick}>
+         <Col md="3" className="card col-md-offset-1" onClick={this.handleClick} style ={{
+             margin: "2%"
+         }}>
             <h2 className="font-weight-light">{this.props.title}</h2>
             <p className="font-weigeht-light">{this.props.description}</p>
-            <span className={"glyphicon glyphicon-" + this.props.image}></span>
+            <span className={"fa fa-" + this.props.image}></span>
         </Col>
         )
     }

@@ -1,3 +1,4 @@
+import { throwStatement } from "@babel/types";
 
 export default class Eco {
 
@@ -37,5 +38,13 @@ export default class Eco {
 
     public get moves() : string {
         return this._moves
+    }
+
+    public get count() : number {
+        return this._moves.split(" ").length
+    }
+
+    public move(n: number) : string {
+        return this._moves.split(" ")[n]
     }
 }

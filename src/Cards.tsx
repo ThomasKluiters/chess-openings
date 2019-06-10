@@ -22,7 +22,7 @@ const Cards: React.FC = () => {
                     description={EXPLORE_DESCRIPTION_TEXT}
                 ></Card>
                 <Card 
-                    link="/drill"
+                    link="/practice/1"
                     title="Drill"
                     image="book"
                     description={DRILL_DESCRIPTION_TEXT}
@@ -30,7 +30,7 @@ const Cards: React.FC = () => {
                 <Card
                     link="/quiz"
                     title="Quiz" 
-                    image="ok-circle"
+                    image="check"
                     description={QUIZ_DESCRIPTION_TEXT}
                 ></Card>
             </Row>

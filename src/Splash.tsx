@@ -7,7 +7,7 @@ const Splash: React.FC = () => {
   return (
     <Route path="/(splash|home|)" render={(props) => (
         <div>
-            <Header></Header>
+            <Header title="Chess Opening Practice"></Header>
             <Cards></Cards>
         </div>
     )} />

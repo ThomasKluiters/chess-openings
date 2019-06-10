@@ -1,0 +1,10 @@
+.practice-button-container {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%
+}
+
+.practice-button-container button {
+    margin: 10px;
+}
