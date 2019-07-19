@@ -20,6 +20,16 @@ export default class Eco {
         this._id = id
     }
 
+    static of(item : any) {
+        return new Eco(
+            item.eco,
+            item.name,
+            item.fen,
+            item.id,
+            item.moves
+        )
+    }
+
     public get id() : string {
         return this._id
     }
